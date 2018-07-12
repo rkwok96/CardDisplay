@@ -27,10 +27,10 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     private ListView myList;
-    final ArrayList<String> cardNamesList = new ArrayList<String>();
-    final ArrayList<String> cardEffectsList = new ArrayList<String>();
+    final ArrayList<String> cardNamesList = new ArrayList<String>(); // list of card names
 
-    final HashMap<String, String> cardsAndEffects = new HashMap<String, String>();
+    final HashMap<String, String> cardsAndEffects = new HashMap<String, String>(); // hashmap of card name / unparsed card data pairs
+    final ArrayList<Card> cardslist = new ArrayList<Card>(); // list of all the card objects for use in the adapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3){
-                String value = (String) adapter.getItemAtPosition(position);
-                try {
-                    Card card = parseCardInfo(cardsAndEffects.get(value));
+                Card card = (Card) adapter.getItemAtPosition(position);
+                String value = card.getRawInfo();
+
+ //                   Card card = parseCardInfo(cardsAndEffects.get(value));
                     Toast.makeText(MainActivity.this, card.print(),
                             Toast.LENGTH_LONG).show();
-                } catch (IOException e){}
+
             }
         });
 
@@ -56,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
        } catch (IOException e){
             Log.v("error", "Can't find file");
         }
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cardNamesList);
+
+        CardAdapter adapter = new CardAdapter(this, cardslist);
+
+       Log.v("fucking", "size in main " + cardslist.size());
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cardNamesList);
+        Log.v("fucking", "" +adapter.getCount());
        myList.setAdapter(adapter);
 
     }
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     if (c != null) {
                         cardNamesList.add(c.getName());
                         cardsAndEffects.put(c.getName(), line);
+                        cardslist.add(c);
                     }
                 }
             }

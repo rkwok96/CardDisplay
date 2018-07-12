@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CardDisplay</string>
+    <string name="todo">TODO</string>
+    <string name="card_name">Card Name</string>
+    <string name="card_description">Card Description</string>
+    <string name="cardatk">CardAtk</string>
+    <string name="carddef">CardDef</string>
 </resources>
