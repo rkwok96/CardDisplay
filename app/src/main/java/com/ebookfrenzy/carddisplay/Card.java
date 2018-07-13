@@ -1,6 +1,9 @@
 package com.ebookfrenzy.carddisplay;
 
-public class Card {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Card implements Parcelable{
 	String rawInfo;
 	String name;
 	String text;
@@ -10,7 +13,8 @@ public class Card {
 	int atk;
 	int def;
 	int level;
-	
+
+
 	public Card(String rawInfo, String name, String text, String card_type, String type, String family, int atk, int def, int level){
 		this.rawInfo = rawInfo;
 		this.name = name;
@@ -23,6 +27,29 @@ public class Card {
 	}
 	
 	public Card() {}
+
+	protected Card(Parcel in){
+	    name = in.readString();
+	    text = in.readString();
+	    card_type = in.readString();
+	    type = in.readString();
+	    family = in.readString();
+	    atk = in.readInt();
+	    def = in.readInt();
+	    level = in.readInt();
+    }
+
+    public static final Creator<Card> CREATOR = new Creator<Card>(){
+	    @Override
+        public Card createFromParcel(Parcel in){
+	        return new Card(in);
+        }
+
+        @Override
+        public Card[] newArray(int size){
+            return new Card[size];
+        }
+    };
 
 	public String getRawInfo() { return rawInfo; }
 
@@ -104,6 +131,24 @@ public class Card {
 //		System.out.println(cardString);
 		return cardString;
 	}
+
+	@Override
+    public int describeContents(){
+	    return 0;
+    }
+
+	@Override
+    public void writeToParcel(Parcel dest, int flags){
+	    dest.writeString(name);
+	    dest.writeString(text);
+	    dest.writeString(card_type);
+	    dest.writeString(type);
+	    dest.writeString(family);
+	    dest.writeInt(atk);
+	    dest.writeInt(def);
+	    dest.writeInt(level);
+    }
+
 	
 
 }

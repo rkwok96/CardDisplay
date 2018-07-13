@@ -1,5 +1,8 @@
 package com.ebookfrenzy.carddisplay;
 
+import android.app.FragmentTransaction;
+import android.app.Fragment;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     final HashMap<String, String> cardsAndEffects = new HashMap<String, String>(); // hashmap of card name / unparsed card data pairs
     final ArrayList<Card> cardslist = new ArrayList<Card>(); // list of all the card objects for use in the adapter
+    public static final String CARD_KEY = "card_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +49,19 @@ public class MainActivity extends AppCompatActivity {
                 String value = card.getRawInfo();
 
  //                   Card card = parseCardInfo(cardsAndEffects.get(value));
-                    Toast.makeText(MainActivity.this, card.print(),
-                            Toast.LENGTH_LONG).show();
+ //                   Toast.makeText(MainActivity.this, card.print(),
+ //                           Toast.LENGTH_LONG).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(CARD_KEY, card);
+                Fragment fragment = new CardDispFragment();
+                fragment.setArguments(bundle);
+
+                //not sure
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.your_placeholder, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
 
             }
         });
@@ -66,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
        myList.setAdapter(adapter);
 
     }
+
+
 
     public  void scanFileToList() throws FileNotFoundException, IOException {
         int count = 0;
@@ -144,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return thisCard;
     }
+
+
 
 
 }
