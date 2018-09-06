@@ -1,67 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:clickable="true"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nameView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="18dp"
-        android:text="@string/card_name"
-        android:textSize="24sp" />
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/cardImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@android:color/transparent" />
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:id="@+id/levelView"
+            android:layout_width="50dp"
+            android:layout_height="21dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameView"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <ImageView
+            android:id="@+id/attribImage"
+            android:layout_width="43dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/DescView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/nameView"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/cardTypeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ctype"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/card_name"
+            android:textSize="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/AtkView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="22dp"
+            android:text="@string/cardatk"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/DefView"
+            app:layout_constraintEnd_toStartOf="@+id/DefView"
+            app:layout_constraintHorizontal_bias="0.104"
+            app:layout_constraintStart_toStartOf="@+id/DescView" />
+
+        <TextView
+            android:id="@+id/DefView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="84dp"
+            android:text="@string/carddef"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/DescView"
+            android:layout_width="match_parent"
+            android:layout_height="457dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="4dp"
+            android:scrollbars="vertical"
+            android:text="@string/card_description"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/AtkView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/nameView"
+            app:layout_constraintTop_toBottomOf="@+id/levelView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/openImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="103dp"
-            android:text="@string/card_description"
-            android:textSize="18sp" />
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/cardTypeView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/DefView"
+            app:layout_constraintVertical_bias="0.588"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
-
-            <TextView
-                android:id="@+id/AtkView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="33dp"
-                android:layout_marginStart="22dp"
-                android:text="@string/cardatk"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/DefView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/AtkView"
-                android:layout_alignBottom="@+id/AtkView"
-                android:layout_marginStart="127dp"
-                android:layout_toEndOf="@+id/AtkView"
-                android:text="@string/carddef"
-                android:textSize="16sp" />
-
-        </RelativeLayout>
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </RelativeLayout>

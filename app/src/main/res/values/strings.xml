@@ -5,4 +5,7 @@
     <string name="card_description">Card Description</string>
     <string name="cardatk">CardAtk</string>
     <string name="carddef">CardDef</string>
+    <string name="ctype">cType</string>
+    <string name="name">Name</string>
+    <string name="search">Search!</string>
 </resources>
